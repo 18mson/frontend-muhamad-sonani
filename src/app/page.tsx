@@ -38,7 +38,7 @@ export default function Home() {
 
   useEffect(() => {
     if (selectedCountry) {
-      loadPorts(selectedCountry.id);
+      loadPorts(selectedCountry.id_negara);
       setSelectedPort(null);
       setSelectedItem(null);
       setItems([]);

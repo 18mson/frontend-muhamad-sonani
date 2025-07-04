@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://202.157.176.100:3001';
+const API_BASE_URL = '/api/proxy';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -31,7 +31,7 @@ api.interceptors.response.use(
 );
 
 export interface Country {
-  id: number;
+  id_negara: number;
   nama_negara: string;
   kode_negara: string;
 }
@@ -62,6 +62,7 @@ export const fetchCountries = async (): Promise<Country[]> => {
 };
 
 export const fetchPorts = async (countryId: number): Promise<Port[]> => {
+    console.log(`Fetching ports for country ID: ${countryId}`);
   try {
     const filter = JSON.stringify({ where: { id_negara: countryId } });
     const response = await api.get(`/pelabuhans?filter=${encodeURIComponent(filter)}`);
