@@ -4,10 +4,11 @@ const API_BASE_URL = 'http://202.157.176.100:3001';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { path: string[] } }
+  { params }: { params: Promise<{ path: string[] }> }
 ) {
   try {
-    const path = params.path.join('/');
+    const resolvedParams = await params;
+    const path = resolvedParams.path.join('/');
     const searchParams = request.nextUrl.searchParams;
     const queryString = searchParams.toString();
     
